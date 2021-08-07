@@ -10,26 +10,12 @@ const WebSocket = require("ws")
 
 const wss = new WebSocket.Server({ server:server })
 
-
-
-
 // Serve all the static files, (ex. index.html app.js style.css)
 app.use(express.static("public/"));
 // Before 8081
 server.listen(PORT, () =>
   console.log(`Listening on ${process.env.PORT} or 3000`)
 );
-
-
-
-
-
-
-
-
-
-
-
 
 
 // hashmap clients
@@ -42,10 +28,6 @@ const playerSlotHTML = {};
 let dealer = null;
 let gameOn = null;
 let player = null;
-
-
-
-
 
 
 wss.on("connection", (ws) => { // wsServer || wss AND request || connection
@@ -70,7 +52,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const playerSlotHTML = result.playerSlotHTML;
       const offline = result.offline;
       const roomId = partyId();
-      const gameId = `http://localhost:3000/` + roomId;
+      const gameId = `http://13.213.149.148:3000/` + roomId;
 
       app.get("/" + roomId, (req, res) => {
         res.sendFile(__dirname + "/public/index.html");
