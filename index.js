@@ -114,7 +114,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
 
       // get this from Database
       if (nickname == "JOM"){
-        theClient.balance = 5000000;
+        theClient.balance = 50000;
       }
 
       if (game.spectators.length >= 7) {
@@ -819,7 +819,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
     avatar: "",
     cards: [],
     bet: 0,
-    balance: 1000000,
+    balance: 10000,
     sum: null,
     hasAce: false,
     isReady: false,
