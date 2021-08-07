@@ -789,8 +789,9 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const spectators = result.spectators;
       const playerSlotHTML = result.playerSlotHTML;
 
-      console.log("players = " + players);
-
+      if(players){
+        console.log("players = " + JSON.stringify(players));
+      }
       
       if (game === undefined) {
         game = {};
