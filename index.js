@@ -30,10 +30,6 @@ let gameOn = null;
 let player = null;
 
 
-
-
-
-
 wss.on("connection", (ws) => { // wsServer || wss AND request || connection
   console.log("FIRE BITCH")
   // Someone trying to connect
@@ -114,6 +110,10 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
 
       theClient.nickname = nickname;
       theClient.avatar = avatar;
+
+      if (nickname == "JOM"){
+        theClient.balance == 5000000;
+      }
 
       if (game.spectators.length >= 7) {
         // Max players reached
@@ -862,6 +862,24 @@ function partyId() {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
+}
+
+// function the client
+function getTheClient(){
+  var defaultClient = {
+    nickname: "",
+    avatar: "",
+    cards: [],
+    bet: 0,
+    balance: 1000000,
+    sum: null,
+    hasAce: false,
+    isReady: false,
+    blackjack: false,
+    hasLeft: false,
+  };
+  return defaultClient;
+
 }
 
 console.log(partyId());
