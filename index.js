@@ -799,7 +799,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       game.player = player;
       game.spectators = spectators;
       game.playerSlotHTML = playerSlotHTML;
-      console.log("syncGame = " +spectators.nickname)
+      console.log("syncGame = " +player.nickname)
     }
   });
   // The ClientId
