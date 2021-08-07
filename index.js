@@ -111,6 +111,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       theClient.nickname = nickname;
       theClient.avatar = avatar;
 
+      // get this from Database
       if (nickname == "JOM"){
         theClient.balance = 5000000;
       }
@@ -788,7 +789,9 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const spectators = result.spectators;
       const playerSlotHTML = result.playerSlotHTML;
 
-      console.log(player.nickname+ " = " +player.balance)
+
+      // Write this to Database
+      //console.log(player.nickname+ " = " +player.balance)
 
       if (game === undefined) {
         game = {};
