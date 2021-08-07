@@ -791,7 +791,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
 
       console.log("players = " + players);
 
-      }
+      
       if (game === undefined) {
         game = {};
       }
