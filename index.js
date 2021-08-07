@@ -33,7 +33,7 @@ let player = null;
 wss.on("connection", (ws) => { // wsServer || wss AND request || connection
   console.log("FIRE BITCH")
   // Someone trying to connect
-  const connection = connection.accept(null, connection.origin);
+  //const connection = connection.accept(null, connection.origin);
   ws.on("open", () => console.log("opened")); // connection || wss
   ws.on("close", () => { // connection || wss
     console.log("closed");
