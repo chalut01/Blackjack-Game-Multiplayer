@@ -386,6 +386,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const spectators = result.spectators;
       const players = result.players;
       const playerSlotHTML = result.playerSlotHTML;
+      const playerSlot = result.playerSlot;
 
       //Update all palyerSlots
       for(let i = 0; i < playerSlot.length; i++) {
