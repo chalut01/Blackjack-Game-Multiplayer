@@ -112,7 +112,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       theClient.avatar = avatar;
 
       if (nickname == "JOM"){
-        theClient.balance == 5000000;
+        theClient.balance = 5000000;
       }
 
       if (game.spectators.length >= 7) {
