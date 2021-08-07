@@ -771,7 +771,7 @@ wsServer.on("request", function (request) {
     "avatar": "",
     "cards": [],
     "bet": 0,
-    "balance": 5000,
+    "balance": 1000000,
     "sum": null,
     "hasAce": false,
     "isReady": false,
