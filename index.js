@@ -143,7 +143,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       // Assign theClient to game.spectators[i]
       for (let i = 0; i < game.spectators.length; i++) {
         if (game.spectators[i].clientId === clientId) {
-          // theClient = game.spectators[i]
+         theClient = game.spectators[i]
           game.spectators[i] = theClient;
         }
       }
