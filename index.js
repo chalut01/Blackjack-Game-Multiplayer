@@ -52,8 +52,9 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const playerSlotHTML = result.playerSlotHTML;
       const offline = result.offline;
       const roomId = partyId();
-      const gameId = `http://13.213.149.148:3100/` + roomId;
-
+      //const gameId = `http://13.213.149.148:3100/` + roomId;
+      const gameId = roomId;
+      
       app.get("/" + roomId, (req, res) => {
         res.sendFile(__dirname + "/public/index.html");
       });
@@ -863,7 +864,7 @@ function partyId() {
   var result = "";
   var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   var charactersLength = characters.length;
-  for (var i = 0; i < 6; i++) {
+  for (var i = 0; i < 10; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
