@@ -826,7 +826,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
     avatar: "",
     cards: [],
     bet: 0,
-    balance: 5000,
+    balance: 1000000,
     sum: null,
     hasAce: false,
     isReady: false,
