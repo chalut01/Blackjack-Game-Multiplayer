@@ -650,6 +650,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
     if (result.method === "playersLength") {
       const gameId = result.gameId;
       const game = games[gameId];
+      console.log("playersLength"+game);
       const spectators = game.spectators;
       const playersLength = game.spectators.length;
 
