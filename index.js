@@ -100,7 +100,6 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const roomId = result.roomId;
       let theClient = result.theClient;
       const clientId = result.clientId;
-      const gameId = result.gameId;
       const game = games[gameId];
       let players = game.players;
       const spectators = game.spectators;
