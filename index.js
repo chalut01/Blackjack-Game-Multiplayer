@@ -510,7 +510,6 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
     if (result.method === "terminate") {
       let gameId = result.gameId;
       let game = games[gameId];
-      let game = result.game
       let spectators = result.spectators;
       let players = result.players;
       const theClient = result.theClient;
