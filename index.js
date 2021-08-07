@@ -789,10 +789,6 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const spectators = result.spectators;
       const playerSlotHTML = result.playerSlotHTML;
 
-
-      // Write this to Database
-      //console.log(player.nickname+ " = " +player.balance)
-
       if (game === undefined) {
         game = {};
       }
@@ -803,6 +799,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       game.player = player;
       game.spectators = spectators;
       game.playerSlotHTML = playerSlotHTML;
+      console.log("syncGame = " +spectators.nickname)
     }
   });
   // The ClientId
