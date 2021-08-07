@@ -59,11 +59,11 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
 
   ws.on("message", (message) => { // connection || wss
     const result = JSON.parse(message);
-    // console.log(message)
+    console.log(message)
 
     // a user want to create a new game
     if (result.method === "create") {
-      // console.log("create")
+      console.log("create")
       const clientId = result.clientId;
       const theClient = result.theClient;
       const playerSlot = result.playerSlot;
@@ -230,9 +230,9 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
 
     if (result.method === "terminateRoom") {
       // let roomId = result.roomId
-      // // console.log(app._router.stack[3].route.path)
+      // console.log(app._router.stack[3].route.path)
       // for(let i = 3; i < app._router.stack.length; i++) {
-      //   // console.log(app._router.stack[i])
+      //   console.log(app._router.stack[i])
       //   console.log(app._router.stack[i].route.path)
       //   console.log("/" + roomId)
       //   if(app._router.stack[i].route.path === "/" + roomId) {
@@ -877,7 +877,7 @@ function partyId() {
   return result;
 }
 
-// console.log(partyId());
+console.log(partyId());
 
 app.get("/offline", (req, res) => {
   res.sendFile(__dirname + "/public/offline.html");
