@@ -789,6 +789,9 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const spectators = result.spectators;
       const playerSlotHTML = result.playerSlotHTML;
 
+      console.log("players = " + players);
+
+      }
       if (game === undefined) {
         game = {};
       }
@@ -799,7 +802,6 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       game.player = player;
       game.spectators = spectators;
       game.playerSlotHTML = playerSlotHTML;
-      console.log("syncGame = " +player.nickname)
     }
   });
   // The ClientId
@@ -864,24 +866,6 @@ function partyId() {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
-
-// function the client
-function getTheClient(){
-  var defaultClient = {
-    nickname: "",
-    avatar: "",
-    cards: [],
-    bet: 0,
-    balance: 1000000,
-    sum: null,
-    hasAce: false,
-    isReady: false,
-    blackjack: false,
-    hasLeft: false,
-  };
-  return defaultClient;
-
 }
 
 console.log(partyId());
