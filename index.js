@@ -33,7 +33,7 @@ let player = null;
 wss.on("connection", (ws) => { // wsServer || wss AND request || connection
   console.log("FIRE BITCH")
   // Someone trying to connect
-  // const connection = connection.accept(null, connection.origin);
+  const connection = connection.accept(null, connection.origin);
   ws.on("open", () => console.log("opened")); // connection || wss
   ws.on("close", () => { // connection || wss
     console.log("closed");
@@ -41,11 +41,11 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
 
   ws.on("message", (message) => { // connection || wss
     const result = JSON.parse(message);
-    // console.log(message)
+    console.log(message)
 
     // a user want to create a new game
     if (result.method === "create") {
-      // console.log("create")
+      console.log("create")
       const clientId = result.clientId;
       const theClient = result.theClient;
       const playerSlot = result.playerSlot;
@@ -67,7 +67,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
         gameOn: gameOn,
         player: player,
         spectators: [],
-        // "lobbySpectators": [],
+        "lobbySpectators": [],
         playerSlot: playerSlot,
         playerSlotHTML: [
           // 7 objectes because the playerSlot has a length of 7
@@ -100,13 +100,13 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const roomId = result.roomId;
       let theClient = result.theClient;
       const clientId = result.clientId;
-      // const gameId = result.gameId;
+      const gameId = result.gameId;
       const game = games[gameId];
       let players = game.players;
       const spectators = game.spectators;
       const playerSlot = game.playerSlot;
       const playerSlotHTML = game.playerSlotHTML;
-      // const partyId = result.partyId;
+      const partyId = result.partyId;
 
       theClient.nickname = nickname;
       theClient.avatar = avatar;
@@ -119,13 +119,13 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       // Push unique Id to the client
       theClient.clientId = clientId;
       // Push client to players array
-      // game.players.push(theClient)
+      game.players.push(theClient)
       game.spectators.push(theClient);
 
       // Assign theClient to game.spectators[i]
       for (let i = 0; i < game.spectators.length; i++) {
         if (game.spectators[i].clientId === clientId) {
-          // theClient = game.spectators[i]
+          theClient = game.spectators[i]
           game.spectators[i] = theClient;
         }
       }
@@ -140,23 +140,23 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       };
 
       // loop through all clients and tell them that people has joined
-      // if(game.players.length === 0) {
+     if(game.players.length === 0) {
       if (!game.gameOn === true) {
         game.spectators.forEach((c) => {
           clients[c.clientId].ws.send(JSON.stringify(payLoad));
         });
       }
 
-      // }
+       }
 
       const payLoadClient = {
         method: "joinClient",
         theClient: theClient,
-        // "players": players,
-        // "spectators": spectators,
-        // "playerSlotHTML": playerSlotHTML,
+        "players": players,
+        "spectators": spectators,
+        "playerSlotHTML": playerSlotHTML,
         game: game,
-        // "gameOn": gameOn
+        "gameOn": gameOn
       };
       // Send theClient to THE CLIENT
       if (!game.gameOn === true) {
@@ -211,17 +211,17 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
     }
 
     if (result.method === "terminateRoom") {
-      // let roomId = result.roomId
+      let roomId = result.roomId
       // // console.log(app._router.stack[3].route.path)
-      // for(let i = 3; i < app._router.stack.length; i++) {
-      //   // console.log(app._router.stack[i])
-      //   console.log(app._router.stack[i].route.path)
-      //   console.log("/" + roomId)
-      //   if(app._router.stack[i].route.path === "/" + roomId) {
-      //     console.log(app._router.stack[i].route.path)
-      //     app._router.stack.splice(i,1);
-      //   }
-      // }
+      for(let i = 3; i < app._router.stack.length; i++) {
+        console.log(app._router.stack[i])
+        console.log(app._router.stack[i].route.path)
+        console.log("/" + roomId)
+        if(app._router.stack[i].route.path === "/" + roomId) {
+          console.log(app._router.stack[i].route.path)
+          app._router.stack.splice(i,1);
+        }
+      }
     }
 
     // bets
@@ -232,7 +232,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const payLoad = {
         method: "bet",
         players: players,
-        // "spectators": spectators
+        "spectators": spectators
       };
 
       spectators.forEach((c) => {
@@ -353,10 +353,10 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
         player: player,
         currentPlayer: currentPlayer,
         players: player,
-        // "theClient": theClient
+        "theClient": theClient
       };
 
-      // players[currentPlayer].clientId.ws.send(JSON.stringify(payLoad))
+      players[currentPlayer].clientId.ws.send(JSON.stringify(payLoad))
       if (dealersTurn === false) {
         game.players.forEach((c) => {
           clients[c.clientId].ws.send(JSON.stringify(payLoad));
@@ -388,12 +388,12 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const players = result.players;
       const playerSlotHTML = result.playerSlotHTML;
 
-      // Update all palyerSlots
-      // for(let i = 0; i < playerSlot.length; i++) {
-      //   if(playerSlot[i].innerHTML === clientId) {
-      //     playerSlotHMTL
-      //   }
-      // }
+      //Update all palyerSlots
+      for(let i = 0; i < playerSlot.length; i++) {
+         if(playerSlot[i].innerHTML === clientId) {
+           playerSlotHMTL
+         }
+       }
 
       // Push client to players array
       players.push(theClient);
@@ -403,7 +403,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       // Assign theClient to game.players[i]
       for (let i = 0; i < players.length; i++) {
         if (players[i].clientId === clientId) {
-          // theClient = game.players[i]
+         theClient = game.players[i]
           players[i] = theClient;
         }
       }
@@ -435,18 +435,18 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
     if (result.method === "updateTable") {
       const playerSlot = result.playerSlot;
 
-      // const payLoad = {
-      //   "method": "joinTable",
-      //   "theSlot": theSlot,
-      //   "user": user,
-      //   "game": game,
-      //   "players": players,
-      //   "spectators": spectators
-      // }
+       const payLoad = {
+         "method": "joinTable",
+         "theSlot": theSlot,
+         "user": user,
+         "game": game,
+         "players": players,
+         "spectators": spectators
+       }
 
-      // spectators.forEach(c => {
-      //   clients[c.clientId].ws.send(JSON.stringify(payLoad))
-      // })
+       spectators.forEach(c => {
+         clients[c.clientId].ws.send(JSON.stringify(payLoad))
+       })
     }
 
     if (result.method === "updatePlayerCards") {
@@ -472,14 +472,14 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const player = result.player;
       const dealer = result.dealer;
       const dealersTurn = result.dealersTurn;
-      // const dealerHiddenCardRemoveNext = result.dealerHiddenCardRemoveNext
+      const dealerHiddenCardRemoveNext = result.dealerHiddenCardRemoveNext
       const payLoad = {
         method: "updateDealerCards",
         player: player,
         dealer: dealer,
         players: players,
         dealersTurn: dealersTurn,
-        // "dealerHiddenCardRemoveNext": dealerHiddenCardRemoveNext
+        "dealerHiddenCardRemoveNext": dealerHiddenCardRemoveNext
       };
       if (dealersTurn === false) {
         spectators.forEach((c) => {
@@ -511,7 +511,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
     if (result.method === "terminate") {
       let gameId = result.gameId;
       let game = games[gameId];
-      // let game = result.game
+      let game = result.game
       let spectators = result.spectators;
       let players = result.players;
       const theClient = result.theClient;
@@ -527,9 +527,9 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       );
 
       // Remove players from player array if the client with the dealscript leaves during 2 card deal phase
-      // if(playersCanPlay === false && clientDeal === theClient.clientId) {
-      //   players = [];
-      // }
+      if(playersCanPlay === false && clientDeal === theClient.clientId) {
+         players = [];
+       }
 
       // To prevent error when user disconnects outside a game
       if (game === undefined) {
@@ -620,13 +620,13 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
         clients[c.clientId].ws.send(JSON.stringify(payLoad));
       });
 
-      // lobbySpectators.forEach(c => {
-      //   clients[c.clientId].ws.send(JSON.stringify(payLoad))
-      // });
+       lobbySpectators.forEach(c => {
+         clients[c.clientId].ws.send(JSON.stringify(payLoad))
+       });
 
       // // Send to THE client
-      // const con = clients[clientId].ws
-      // con.send(JSON.stringify(payLoad));
+       const con = clients[clientId].ws
+       con.send(JSON.stringify(payLoad));
     }
 
     if (result.method === "playersLength") {
@@ -696,7 +696,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
 
       const payLoad = {
         method: "finalCompare",
-        // "players": players
+        "players": players
       };
 
       spectators.forEach((c) => {
