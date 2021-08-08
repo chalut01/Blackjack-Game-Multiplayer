@@ -52,7 +52,7 @@ wss.on("connection", (ws) => { // wsServer || wss AND request || connection
       const playerSlotHTML = result.playerSlotHTML;
       const offline = result.offline;
       const roomId = partyId();
-      const gameId = `http://blackjack.tothedoi.com:3100/` + roomId;
+      const gameId = `http://13.213.149.148:3100/` + roomId;
       //const gameId = roomId;
 
       app.get("/" + roomId, (req, res) => {
